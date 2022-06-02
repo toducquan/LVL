@@ -17,19 +17,27 @@ const login = async (req, res) => {
         return res.status(403).send({ mess: "incorrect email or password"});
     if( await bcrypt.compare(req.body.password, user.password)) {
         const token = jwt.sign({
+            _id: user._id,
             email: user.email,
             role: user.role,
-            username: user.username,
+            name: user.name,
+            dob: user.dob,
+            age: user.age,
         }, `${process.env.JWT_SECRET}`
         , {
             expiresIn: '30d'
         })
-        return res.status(200).send({token: token})
+        return res.status(200).send({access_token: token})
     }
     res.status(403).send({ mess: "incorrect email or password"});
+}
+
+const getUserInfor = async (req, res) => {
+    return res.status(200).send(req.user)
 }
 
 module.exports = {
     register,
     login,
+    getUserInfor,
 }

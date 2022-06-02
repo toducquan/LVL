@@ -2,28 +2,23 @@ const mongoose = require('mongoose');
 
 const classModel = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
-    grade: Number,
     name: String,
-    mathTeacher: {
+    hrm_id: {
         required: false,
         type: mongoose.Schema.Types.ObjectId,
     },
-    literatureTeacher: {
+    math_id: {
         required: false,
         type: mongoose.Schema.Types.ObjectId,
     },
-    englishTeacher: {
+    english_id: {
         required: false,
         type: mongoose.Schema.Types.ObjectId,
     },
-    biologyTeacher: {
+    literature_id: {
         required: false,
         type: mongoose.Schema.Types.ObjectId,
-    },
-    chemistryTeacher: {
-        required: false,
-        type: mongoose.Schema.Types.ObjectId,
-    },
-})
+    }
+}, { timestamps: true })
 
 module.exports = mongoose.model('Class', classModel);

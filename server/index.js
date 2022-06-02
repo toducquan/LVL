@@ -3,10 +3,14 @@ const path = require('path')
 const mongoose = require('mongoose')
 const router = require('./src/router')
 const bodyParser = require('body-parser')
+const cors = require('cors');
 
 require('dotenv').config({path: path.join(__dirname, './.env')})
 
 const app = express();
+app.use(cors({
+    origin: '*'
+}));
 app.use(bodyParser.json());
 
 mongoose.connect(`${process.env.MONGO_URL}`,  { useNewUrlParser: true, useUnifiedTopology: true })

@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const config = process.env;
 
 const verifyToken = (req, res, next) => {
-  const token =req.headers["access-token"]
+  const token =req.headers["access_token"]
   if (!token) {
     return res.status(403).send({mess: "A token is required for authentication"});
   }

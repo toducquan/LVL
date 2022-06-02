@@ -10,17 +10,14 @@ const userModel = new mongoose.Schema({
         required: true,
         type: String,
     },
-    username: String,
+    name: String,
+    dob: String,
     age: String,
     role: Number,
     classId: {
         required: false,
-        type:mongoose.Schema.Types.ObjectId,
-    }, 
-    subject: {
-        required: false,
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
     }
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('User', userModel);

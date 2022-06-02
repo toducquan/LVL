@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
+
+.card-body {
+  display: flex;
+  font-family: "Poppins", sans-serif;
+}
+
+.containerr {
+  margin: auto;
+  padding: 1em;
+}
+
+.admin-homepage .card {
+  display: grid;
+  grid-template-rows: 1fr auto max-content;
+  width: 22.5rem;
+  aspect-ratio: 1 / 1.5;
+  background: #fff;
+  border-radius: 0.5em;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.2), 0 2px 4px 0px rgba(0, 0, 0, 0.2),
+    0 4px 8px 0px rgba(0, 0, 0, 0.2), 0 8px 16px 0px rgba(0, 0, 0, 0.067),
+    0 16px 32px 0px rgba(0, 0, 0, 0.133), 0 32px 48px 0px rgba(0, 0, 0, 0.2);
+}
+
+.admin-homepage .card-header {
+  display: grid;
+  position: relative;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card-header::before {
+  content: '';
+  position: absolute;
+  display: flex;
+  inset: 0;
+  background: url(https://cdn.pixabay.com/photo/2017/06/26/08/13/mockup-2443050_960_720.jpg) center/cover;
+  transition: transform 300ms ease;
+}
+
+.test-list::before {
+  background: url(https://www.timeshighereducation.com/sites/default/files/styles/the_breaking_news_image_style/public/multiple.jpg?itok=4V7YlVvf) center/cover !important;
+}
+
+.card-header:hover::before {
+  transform: scale(1.2);
+  transition: transform 266ms linear;
+}
+
+.title {
+  text-align: center;
+  width: 12ch;
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1.2;
+  font-size: 2.6rem;
+  margin: auto;
+  -webkit-text-stroke: 1.5px #0005;
+  color: hsla(0, 100%, 100%, 0.8);
+  text-shadow: 2px 2px 1px #0001, 2px 3px 2px #0002, 3px 4px 3px #0003,
+    3px 5px 5px #0003, 4px 5px 7px #0004, 4px 6px 10px #0005;
+  transform: rotate(-10deg);
+}
+
+.title:first-letter {
+  color: hsla(0, 100%, 100%, 0.8);
+  text-shadow: 3px 3px 0px teal;
+  font-size: 1.5em;
+}
+
+.card-content {
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+}
+
+.card-content,
+.card-footer {
+  margin-inline: 1rem;
+}
+
+.card-footer {
+  align-self: end;
+  margin-block-end: 2rem;
+}
+
+.secondary-title {
+  width: max-content;
+  text-transform: capitalize;
+  font-weight: 400;
+  color: #444;
+  font-size: 1.6rem;
+  margin-block: 1rem 2rem;
+  position: relative;
+}
+
+.secondary-title::before {
+  content: '';
+  position: absolute;
+  display: inline-flex;
+  width: calc(100% + 0.5em);
+  top: 2.5rem;
+  border-bottom: 3px solid teal;
+}
+
+.text {
+  color: rgba(10, 7, 7, 0.533);
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.375em 1.3em;
+  border-radius: 0.25em;
+  border: 1px solid teal;
+  text-decoration: none;
+  font-weight: 800;
+  box-shadow: 0px 2px 1px -1px #0001, 0.125em 0.125em 0.25em 0.0625em #0002,
+    0 0.2em 0.5em #0002;
+  background: #0000;
+}
+
+.btn:hover,
+.btn:focus {
+  box-shadow: none;
+  background: #0001;
+}
+
+.btn-text {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: teal;
+}
+
+i {
+  display: inline-flex;
+  color: teal;
+  position: relative;
+}
+
+.admin-homepage__header {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 60px 20px;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+thead {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+th {
+  background: #215a8e;
+  color: #fff;
+}
+
+td:nth-child(1) {
+  background: #215a8e;
+  color: #fff;
+  border-radius: 1em 1em 0 0;
+}
+
+th,
+td {
+  padding: 1em;
+}
+
+tr,
+td {
+  display: block;
+}
+
+td {
+  position: relative;
+}
+
+td::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 0;
+  padding-left: 1em;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+
+tr {
+  margin-bottom: 1.5em;
+  border: 1px solid #ddd;
+  border-radius: 1em;
+  text-align: right;
+}
+
+tr:last-of-type {
+  margin-bottom: 0;
+}
+
+td:nth-child(n + 2):nth-child(odd) {
+  background-color: #ddd;
+}
+
+@media only screen and (min-width: 768px) {
+  table {
+    max-width: 1430px;
+    margin-left: 60px;
+    border: 1px solid #ddd;
+  }
+
+  thead {
+    visibility: visible;
+    position: relative;
+  }
+
+  th {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.9em;
+  }
+
+  tr {
+    display: table-row;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+  }
+
+  tr:nth-child(even) {
+    background-color: #ddd;
+  }
+
+  td {
+    display: table-cell;
+  }
+
+  td::before {
+    content: none;
+  }
+
+  td:nth-child(1) {
+    background: transparent;
+    color: #444;
+    border-radius: 0;
+  }
+
+  td:nth-child(n + 2):nth-child(odd) {
+    background-color: transparent;
+  }
+}
+
+.manager span {
+  color: red;
+}
+
+.grade-div {
+  margin: 10px 0px;
+}
+
+.grade-div lable {
+  display: inline-block;
+  width: 215px;
+}

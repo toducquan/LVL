@@ -1,21 +1,37 @@
 const role = require("../constant/role")
-const classService = require("../service/class.service")
+const classService = require('../service/class.service')
 
-const getAllClasses = async (req, res) => {
-    if(req.user.role != role.ADMIN)
-        return res.status(403).send({ mess: "not found"})
-    const classes = await classService.getAllClass();
-    res.status(200).send(classes)
+const findAll = async (req, res) => {
+    const classes = await classService.findAll()
+    res.status(200).send(classes);
 }
 
-const createNewClass = async (req, res) => {
-    if(req.user.role != role.ADMIN)
-        return res.status(403).send({ mess: "not found"})
-    const newClass = await classService.createClass(req.body);
+const create = async (req, res) => {
+    const newClass = await classService.create(req.body);
     res.status(200).send(newClass)
 }
 
+const findAllClassOfTeacher = async (req, res) => {
+    const classes = await classService.findAllClassOfTeacher(req.user._id);
+    res.status(200).send(classes)
+}
+
+const findOne = async (req, res) => {
+    const classes = await classService.findOne(req.params.id);
+    res.status(200).send(classes)
+}
+
+const update = async (req, res) => {
+    const newClass = await classService.update(req.params.id, req.body);
+    res.status(200).send(newClass)
+}
+
+
+
 module.exports = {
-    getAllClasses,
-    createNewClass,
+    findAll,
+    create,
+    findAllClassOfTeacher,
+    findOne,
+    update,
 }

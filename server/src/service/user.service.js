@@ -12,6 +12,26 @@ const create = async (payload) => {
     }
 }
 
+const findAll = async () => {
+    try {
+        const teacher = await User.find({
+            role: 2
+        })
+        return teacher;
+    } catch (error) {
+        console.log('err: ', error)
+    }
+}
+
+const getAllStudentInClass = async (id) => {
+    const student = await User.find({
+        classId: id,
+    })
+    return student;
+}
+
 module.exports = {
     create,
+    findAll,
+    getAllStudentInClass,
 }
