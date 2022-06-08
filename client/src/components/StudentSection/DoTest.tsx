@@ -31,7 +31,7 @@ const DoTest = () => {
       <form id="survey-form">
         <div className="form-group">
           <label id="name-label" >
-            Test: {questions.title}
+            Môn học: {questions.title}
           </label>
         </div>
         {questions.content.map((item: any, key: any) => {
@@ -59,7 +59,7 @@ const DoTest = () => {
           className="form-group submit-button"
           onClick={() => handleSubmitTest()}
         >
-          Submit
+          Gửi
         </div>
       </form>
     </div>

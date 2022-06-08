@@ -23,3 +23,20 @@ export const addTeachersService = (data: any) => {
         }
     })
 }
+
+export const editUserService = (id: any, data: any) => {
+    console.log('vao: ', data)
+    return axios.put(`http://localhost:5000/user/${id}`, data, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}
+
+export const deleteUserService = (id: any) => {
+    return axios.delete(`http://localhost:5000/user/${id}`, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}

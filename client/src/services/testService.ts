@@ -49,3 +49,37 @@ export const createGradeService = (data: any) => {
         }
     })
 }
+
+export const editTestService = (id: any, data: any) => {
+    console.log('vao: ', data)
+    return axios.put(`http://localhost:5000/test/${id}`, data, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}
+
+export const deleteTestService = (id: any) => {
+    return axios.delete(`http://localhost:5000/test/${id}`, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}
+
+export const editGradeService = (id: any, data: any) => {
+    console.log('vao: ', data)
+    return axios.put(`http://localhost:5000/grade/${id}`, data, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}
+
+export const deleteGradeService = (id: any) => {
+    return axios.delete(`http://localhost:5000/grade/${id}`, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}

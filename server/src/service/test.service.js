@@ -149,7 +149,7 @@ const findOne = async (id) => {
     } catch (error) { }
 }
 
-const update = async (id) => {
+const update = async (id, payload) => {
     await Test.findByIdAndUpdate(id, {
         ...payload
     })

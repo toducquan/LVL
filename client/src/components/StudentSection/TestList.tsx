@@ -3,24 +3,52 @@ import { Link } from 'react-router-dom';
 import { getTestsOfStudentService } from '../../services/testService';
 import { Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { getUserService } from '../../services/authService';
+import { editUserService } from '../../services/userService';
 
 const TestList = () => {
   const [test, setTest] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const user = useSelector((state: any) => state.auth.user);
+  const [student, setStudent] = useState<any>();
+
   useEffect(() => {
     getTestsOfStudentService().then((res) => {
       console.log('data ', res.data)
       setTest(res.data);
     });
+    getUserService().then((res) => {
+      setStudent(res.data)
+    })
   }, []);
+
+  const handleEditUser = () => {
+    editUserService(student._id, {
+      name: student.name,
+      email: student.email,
+      age: student.age,
+      dob: student.dob,
+    })
+    .then(() => {
+      getTestsOfStudentService().then((res) => {
+        console.log('data ', res.data)
+        setTest(res.data);
+      });
+      getUserService().then((res) => {
+        setStudent(res.data)
+      })
+      setModalVisible(false)
+    })
+    .catch((err) => console.log('err: ', err))
+  }
+  
   return (
     <>
       <div className="admin-homepage">
         <div className="admin-homepage__header">
 
           <button className="btn" onClick={() => setModalVisible(true)}>
-            <span className="btn-text">Student Information</span>
+            <span className="btn-text">Hồ sơ</span>
           </button>
 
         </div>
@@ -40,10 +68,10 @@ const TestList = () => {
                     }
                     {
                       item?.deadline && (
-                        <div className="text">Deadline: {item?.deadline}</div>
+                        <div className="text">Thời hạn: {item?.deadline}</div>
                       )
                     }
-                    <div className="text">Factor: {item?.factor}</div>
+                    <div className="text">Hệ số: {item?.factor}</div>
                   </article>
                   <footer className="card-footer">
                     {
@@ -56,7 +84,7 @@ const TestList = () => {
                           }}
                         >
                           <button className="btn">
-                            <span className="btn-text">View test</span>
+                            <span className="btn-text">Chi tiết</span>
                           </button>
                         </Link>
                       )
@@ -68,22 +96,22 @@ const TestList = () => {
           })}
         </div>
       </div>
-      <Modal title="Add grade" visible={modalVisible} onOk={() => setModalVisible(false)} onCancel={() => setModalVisible(false)}>
-        <div style={{ marginBottom: 10 }}>
-          <label style={{ display: "inline-block", width: 215 }}>Name</label>
-          <input value={user.name}></input>
+      <Modal title="Chỉnh sửa" visible={modalVisible} onOk={() => handleEditUser()} onCancel={() => setModalVisible(false)}>
+      <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }} >Tên</label>
+          <input value={student?.name} onChange={(e) => setStudent({ ...student, name: e.target.value})}></input>
         </div>
-        <div style={{ marginBottom: 10 }}>
-          <label style={{ display: "inline-block", width: 215 }}>Email</label>
-          <input value={user.email}></input>
+        <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }} >Email</label>
+          <input value={student?.email} onChange={(e: any) => setStudent({ ...student, email: e.target.value})}></input>
         </div>
-        <div style={{ marginBottom: 10 }}>
-          <label style={{ display: "inline-block", width: 215 }}>Dob</label>
-          <input value={user.dob}></input>
+        <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }} >Ngày sinh</label>
+          <input value={student?.dob} onChange={(e: any) => setStudent({ ...student, dob: e.target.value})}></input>
         </div>
-        <div style={{ marginBottom: 10 }}>
-          <label style={{ display: "inline-block", width: 215 }}>Age</label>
-          <input value={user.age}></input>
+        <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }} >Tuổi</label>
+          <input value={student?.age} onChange={(e: any) => setStudent({ ...student, age: e.target.value})}></input>
         </div>
       </Modal>
     </>

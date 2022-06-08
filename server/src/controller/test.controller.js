@@ -50,7 +50,7 @@ const createNewGrade = async (req, res) => {
 
 const update = async (req, res) => {
     const newTest = await testService.update(req.params.id, req.body);
-    res.status(200).send(newClass)
+    res.status(200).send(newTest)
 }
 
 const remove = async (req, res) => {

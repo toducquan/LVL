@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { getStudentInClassService } from '../../services/userService';
+import { deleteUserService, editUserService, getStudentInClassService } from '../../services/userService';
 import { createGradeService } from '../../services/testService'
-import { Modal } from 'antd';
+import { Button, Modal } from 'antd';
 const ClassView = () => {
   const [students, setStudents] = useState([]);
   const [factor, setFactor] = useState();
   const [data, setData] = useState<any>([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalEditStudent, setModalEditStudent] = useState(false);
   const [modalDetailVisible, setModalDetailVisible] = useState(false);
   const location = useLocation();
   const { isManager, classId }: any = location.state;
+  const [selectedStudent, setSelectedStudent] = useState<any>();
 
   const [count, setCount] = useState({
     excellent: 0,
@@ -21,7 +23,6 @@ const ClassView = () => {
   console.log(students)
   useEffect(() => {
     getStudentInClassService(classId).then((res) => {
-      console.log(res.data)
       setStudents(res.data.data);
       setCount({
         excellent: res.data.excellent,
@@ -31,6 +32,46 @@ const ClassView = () => {
       })
     });
   }, []);
+
+  const handleSelectUser = (id: any) => {
+    const student = students.find((item: any) => {
+      return item._id == id;
+    })
+    setSelectedStudent(student);
+  }
+  const handleEditUser = () => {
+    editUserService(selectedStudent._id, selectedStudent)
+    .then(() => {
+      getStudentInClassService(classId).then((res) => {
+        setStudents(res.data.data);
+        setCount({
+          excellent: res.data.excellent,
+          fairly: res.data.fairly,
+          medium: res.data.medium,
+          weak: res.data.weak
+        })
+      });
+      setModalEditStudent(false)
+    })
+    .catch((err) => console.log('err: ', err))
+  }
+
+  const handleDeleteUser = () => {
+    console.log('vao: ', selectedStudent);
+    deleteUserService(selectedStudent._id)
+    .then(() => {
+      getStudentInClassService(classId).then((res) => {
+        setStudents(res.data.data);
+        setCount({
+          excellent: res.data.excellent,
+          fairly: res.data.fairly,
+          medium: res.data.medium,
+          weak: res.data.weak
+        })
+      });
+    })
+    .catch((err) => console.log('err: ', err))
+  }
 
   const handleOk = () => {
     createGradeService({
@@ -63,24 +104,25 @@ const ClassView = () => {
       <div className="admin-homepage__header">
         <Link to="/">
           <button className="btn">
-            <span className="btn-text">Back</span>
+            <span className="btn-text">Quay lại</span>
           </button>
         </Link>
         {isManager && (
           <Link to="/add-student" state={{ classId: classId }}>
             <button className="btn">
-              <span className="btn-text">Add Student</span>
+              <span className="btn-text">Thêm học sinh</span>
             </button>
           </Link>
         )}
       </div>
       <table>
         <thead>
-          <th>Name</th>
+          <th>Họ tên</th>
           <th>Email</th>
-          <th>Age</th>
-          <th>Dob</th>
-          <th>Total point</th>
+          <th>Tuổi</th>
+          <th>Ngày sinh</th>
+          <th>Điểm trung bình</th>
+          <th>Hành động</th>
         </thead>
         <tbody>
           {students?.map((item: any) => {
@@ -91,6 +133,12 @@ const ClassView = () => {
                 <td data-label="ba">{item.age}</td>
                 <td data-label="obp">{item.dob}</td>
                 <td data-label="slg">{item.total}</td>
+                <td data-label="slg">
+                  <Button type="primary" onClick={() => { handleSelectUser(item._id); setModalEditStudent(true) }}>Sửa</Button>
+                  <Button type="primary" danger onClick={() => { handleSelectUser(item._id); handleDeleteUser()}}>
+                    Xóa
+                  </Button>
+                </td>
               </tr>
             );
           })}
@@ -98,16 +146,16 @@ const ClassView = () => {
       </table>
       <div className="admin-homepage__header">
         <button className="btn" onClick={() => setModalVisible(true)}>
-          <span className="btn-text">Add grade</span>
+          <span className="btn-text">Nhập điểm</span>
         </button>
         <button className="btn" onClick={() => setModalDetailVisible(true)}>
-          <span className="btn-text">View Detail</span>
+          <span className="btn-text">Thống kê</span>
         </button>
       </div>
-      <Modal title="Add grade" visible={modalVisible} onOk={handleOk} onCancel={() => setModalVisible(false)}>
-        <p>Name</p>
+      <Modal title="Thêm điểm" visible={modalVisible} onOk={handleOk} onCancel={() => setModalVisible(false)}>
+        <p>Môn học</p>
         <input></input>
-        <p>Factor</p>
+        <p>Hệ số</p>
         <input onChange={(e: any) => setFactor(e.target.value)}></input>
         {
           students.map((item: any) => {
@@ -121,10 +169,28 @@ const ClassView = () => {
         }
       </Modal>
       <Modal title="Detail" visible={modalDetailVisible} onOk={() => setModalDetailVisible(false)} onCancel={() => setModalDetailVisible(false)}>
-        <p>Excellent: {Math.ceil(count.excellent * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
-        <p>Fairy: {Math.ceil(count.fairly * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
-        <p>Medium: {Math.ceil(count.medium * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
-        <p>Weak: {Math.ceil(count.weak * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
+        <p>Tỉ lệ học sinh giỏi: {Math.ceil(count.excellent * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
+        <p>Tỉ lệ học sinh khá: {Math.ceil(count.fairly * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
+        <p>Tỉ lệ học sinh trung bình: {Math.ceil(count.medium * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
+        <p>Tỉ lệ học sinh yếu: {Math.ceil(count.weak * 100 / (count.excellent + count.medium + count.fairly + count.weak))}%</p>
+      </Modal>
+      <Modal title="Chỉnh sửa" visible={modalEditStudent} onOk={() => handleEditUser()} onCancel={() => setModalVisible(false)}>
+        <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }}>Tên</label>
+          <input value={selectedStudent?.name} onChange={(e) => setSelectedStudent({ ...selectedStudent, name: e.target.value})}></input>
+        </div>
+        <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }}>Email</label>
+          <input value={selectedStudent?.email} onChange={(e) => setSelectedStudent({ ...selectedStudent, email: e.target.value})}></input>
+        </div>
+        <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }}>Ngày sinh</label>
+          <input value={selectedStudent?.dob} onChange={(e) => setSelectedStudent({ ...selectedStudent, dob: e.target.value})}></input>
+        </div>
+        <div style={{ marginBottom: 10}}>
+          <label style={{ display: "inline-block", width: 215 }}>Tuổi</label>
+          <input value={selectedStudent?.age} onChange={(e) => setSelectedStudent({ ...selectedStudent, age: e.target.value})}></input>
+        </div>
       </Modal>
     </>
   );

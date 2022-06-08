@@ -8,6 +8,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
   const user = useSelector((state: any) => state.auth.user);
 
   if (user) return <Navigate to="/"></Navigate>;
@@ -25,7 +26,7 @@ const Login = () => {
   return (
     <div className="container">
       <div className="intro-text">
-        <h1>Sign in</h1>
+        <h1>Đăng nhập</h1>
       </div>
       <div className="inputs">
         <div className="input">
@@ -46,10 +47,10 @@ const Login = () => {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label>Password</label>
+          <label>Mật khẩu</label>
         </div>
       </div>
-      <button onClick={() => handleLoginForm()}>Sign in</button>
+      <button onClick={() => handleLoginForm()}>Đăng nhập</button>
       <p className="join-link">
         New to linkedin? <a href="#">Join now</a>
       </p>

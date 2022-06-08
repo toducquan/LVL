@@ -33,7 +33,7 @@ const AddStudent = () => {
       <form id="survey-form">
         <div className="form-group">
           <label id="name-label" >
-            Name <span>*</span>
+            Họ và tên <span>*</span>
           </label>
           <input
             type="text"
@@ -54,7 +54,7 @@ const AddStudent = () => {
         </div>
         <div className="form-group">
           <label id="email-label" >
-            Password<span>*</span>
+            Mật khẩu<span>*</span>
           </label>
           <input
             type="password"
@@ -64,7 +64,7 @@ const AddStudent = () => {
         </div>
         <div className="form-group">
           <label id="email-label">
-            Age<span>*</span>
+            Tuổi<span>*</span>
           </label>
           <input
             type="text"
@@ -74,7 +74,7 @@ const AddStudent = () => {
         </div>
         <div className="form-group">
           <label id="email-label" >
-            Date of birth<span>*</span>
+            Ngày sinh<span>*</span>
           </label>
           <input
             type="text"
@@ -86,7 +86,7 @@ const AddStudent = () => {
           className="form-group submit-button"
           onClick={() => handleSubmitForm()}
         >
-          Submit
+          Gửi
         </div>
       </form>
     </div>

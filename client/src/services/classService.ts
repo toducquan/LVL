@@ -23,3 +23,19 @@ export const getAllClassOfTeacher = () => {
         }
     })
 }
+
+export const editClassService = (id: any, data: any) => {
+    return axios.put(`http://localhost:5000/class/${id}`, data, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}
+
+export const deleteClassService = (id: any) => {
+    return axios.delete(`http://localhost:5000/class/${id}`, {
+        headers: {
+            access_token: localStorage.getItem('token') as any
+        }
+    }) 
+}

@@ -38,7 +38,7 @@ const AddClass = () => {
       <form id="survey-form">
         <div className="form-group">
           <label id="name-label" >
-            Name <span>*</span>
+            Tên lớp <span>*</span>
           </label>
           <input
             type="text"
@@ -48,36 +48,36 @@ const AddClass = () => {
           />
         </div>
         <div className="form-group">
-          <p>Manager teacher?</p>
+          <p>Chọn giáo viên chủ nhiệm?</p>
           <select id="dropdown" name="role" className="form-control" onChange={(e: any) => setHrm(e.target.value)}>
-            <option disabled selected hidden>Select teacher</option>
+            <option disabled selected hidden>Vui lòng chọn</option>
             {teachers.map((item: any) => {
               return <option value={item._id}>{item.name}</option>
             })}
           </select>
         </div>
         <div className="form-group">
-          <p>Math teacher?</p>
+          <p>Chọn giáo viên toán?</p>
           <select id="dropdown" name="role" className="form-control" onChange={(e: any) => setMath(e.target.value)}>
-            <option disabled selected hidden>Select teacher</option>
+            <option disabled selected hidden>Vui lòng chọn</option>
             {teachers.map((item: any) => {
               return <option value={item._id}>{item.name}</option>
             })}
           </select>
         </div>
         <div className="form-group">
-          <p>English teacher?</p>
+          <p>Chọn giáo viên tiếng anh?</p>
           <select id="dropdown" name="role" className="form-control" onChange={(e: any) => setEnglish(e.target.value)}>
-            <option disabled selected hidden>Select teacher</option>
+            <option disabled selected hidden>Vui lòng chọn</option>
             {teachers.map((item: any) => {
               return <option value={item._id}>{item.name}</option>
             })}
           </select>
         </div>
         <div className="form-group">
-          <p>Literature teacher?</p>
+          <p>Chọn giáo viên văn?</p>
           <select id="dropdown" name="role" className="form-control" onChange={(e: any) => setLiterature(e.target.value)}>
-            <option disabled selected hidden>Select teacher</option>
+            <option disabled selected hidden>Vui lòng chọn</option>
             {teachers.map((item: any) => {
               return <option value={item._id}>{item.name}</option>
             })}
@@ -88,7 +88,7 @@ const AddClass = () => {
           className="form-group submit-button"
           onClick={() => handleSubmitForm()}
         >
-          Submit
+          Gửi
         </div>
       </form>
     </div>

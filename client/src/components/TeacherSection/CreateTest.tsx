@@ -64,7 +64,7 @@ const CreateTest = () => {
       <form id="survey-form">
         <div className="form-group">
           <label id="name-label" >
-            Title <span>*</span>
+            Môn học <span>*</span>
           </label>
           <input
             type="text"
@@ -75,7 +75,7 @@ const CreateTest = () => {
         </div>
         <div className="form-group">
           <label id="name-label" >
-            Deadline <span>*</span>
+            Thời hạn <span>*</span>
           </label>
           <input
             type="text"
@@ -86,7 +86,7 @@ const CreateTest = () => {
         </div>
         <div className="form-group">
           <label id="name-label">
-            Faftor <span>*</span>
+            Hệ số <span>*</span>
           </label>
           <input
             type="text"
@@ -96,14 +96,14 @@ const CreateTest = () => {
           />
         </div>
         <div className="form-group">
-          <p>Select class?</p>
+          <p>Chọn lớp?</p>
           <select
             id="dropdown"
             name="role"
             className="form-control"
             onChange={(e: any) => setClassId(e.target.value)}
           >
-            <option disabled selected hidden>Select class</option>
+            <option disabled selected hidden>Vui lòng chọn lớp</option>
             {classes.map((item: any) => {
               return <option value={item._id}>{item.name}</option>;
             })}
@@ -196,13 +196,13 @@ const CreateTest = () => {
           className="form-group submit-button submit-button__ques"
           onClick={() => handleAddNewQuestion()}
         >
-          Create
+          Tạo câu hỏi
         </div>
         <div
           className="form-group submit-button"
           onClick={() => handleSubmitTest()}
         >
-          Submit
+          Gửi
         </div>
       </form>
     </div>

@@ -33,7 +33,8 @@ const login = async (req, res) => {
 }
 
 const getUserInfor = async (req, res) => {
-    return res.status(200).send(req.user)
+    const user = await User.findById(req.user._id)
+    return res.status(200).send(user)
 }
 
 module.exports = {

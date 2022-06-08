@@ -16,22 +16,22 @@ const Navbar = ({ role }: any) => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Trang chủ</Link>
           </li>
           <li>
-            <Link to="/">Product</Link>
+            <Link to="/">Sản Phẩm</Link>
           </li>
           <li>
             <Link to="/">About us</Link>
           </li>
           <li>
-            <Link to="/">Contact</Link>
+            <Link to="/">Liên hệ</Link>
           </li>
           {role ? (
-            <li onClick={() => handleLogout()}><a href='/login'>Logout</a></li>
+            <li onClick={() => handleLogout()}><a href='/login'>Đăng xuất</a></li>
           ) : (
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login">Đăng nhập</Link>
             </li>
           )}
 
