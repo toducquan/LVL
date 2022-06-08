@@ -9,6 +9,7 @@ router.get('/', verifyToken, isManager, classController.findAll)
 router.post('/', verifyToken, isAdmin, classController.create)
 router.get('/teach', verifyToken, isManager, classController.findAllClassOfTeacher)
 router.get('/:id', verifyToken, classController.findOne)
-router.patch('/:id', verifyToken, classController.update)
+router.put('/:id', verifyToken, classController.update)
+router.delete('/:id', verifyToken, classController.remove)
 
 module.exports = router

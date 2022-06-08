@@ -48,6 +48,16 @@ const createNewGrade = async (req, res) => {
     return res.status(200).send({ mess: "create successfully" });
 }
 
+const update = async (req, res) => {
+    const newTest = await testService.update(req.params.id, req.body);
+    res.status(200).send(newClass)
+}
+
+const remove = async (req, res) => {
+    await testService.remove(req.params.id);
+    res.status(200).send({ mess: "delete successfully"})
+}
+
 module.exports = {
     create,
     findAll,
@@ -56,4 +66,6 @@ module.exports = {
     getListTotalMarkForClass,
     findOne,
     createNewGrade,
+    update,
+    remove,
 }

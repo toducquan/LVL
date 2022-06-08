@@ -10,6 +10,8 @@ router.get('/', verifyToken, testController.findAll)
 router.get('/student-test', verifyToken, testController.getAllTestOfStudent)
 router.post('/student-test/:id', verifyToken, testController.doExam)
 router.get('/:id', testController.findOne)
+router.put('/:id', testController.update)
+router.delete('/:id', testController.remove)
 router.get('/class/:id', verifyToken, isManager, testController.getListTotalMarkForClass);
 
 module.exports = router;

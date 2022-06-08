@@ -149,6 +149,17 @@ const findOne = async (id) => {
     } catch (error) { }
 }
 
+const update = async (id) => {
+    await Test.findByIdAndUpdate(id, {
+        ...payload
+    })
+}
+
+const remove = async (id) => {
+    await Test.findByIdAndRemove(id);
+    await gradeService.deleteGradeWithTestId(id);
+}
+
 module.exports = {
     create,
     getAllTestOfStudent,
@@ -157,4 +168,6 @@ module.exports = {
     doExam,
     findOne,
     findAll,
+    update,
+    remove,
 }

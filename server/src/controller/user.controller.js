@@ -12,7 +12,19 @@ const findAll = async (req, res) => {
     res.status(200).send(teacher);
 }
 
+const update = async (req, res) => {
+    const newUser = await UserService.update(req.params.id, req.body);
+    res.status(200).send(newUser)
+}
+
+const remove = async (req, res) => {
+    await UserService.remove(req.params.id);
+    res.status(200).send({ mess: "delete successfully"})
+}
+
 module.exports = {
     create,
     findAll,
+    update,
+    remove,
 }

@@ -26,6 +26,11 @@ const update = async (req, res) => {
     res.status(200).send(newClass)
 }
 
+const remove = async (req, res) => {
+    await classService.remove(req.params.id);
+    res.status(200).send({ mess: "delete successfully"})
+}
+
 
 
 module.exports = {
@@ -34,4 +39,5 @@ module.exports = {
     findAllClassOfTeacher,
     findOne,
     update,
+    remove,
 }

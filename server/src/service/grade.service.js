@@ -20,7 +20,6 @@ const getAllGradeWithStudentId = async (id) => {
 }
 
 const updatePointWithTestIdAndStudentId = async (testId, studentId, newGrade) => {
-    console.log('vao: ', testId, studentId, newGrade)
     const oldGrade = await Grade.findOneAndUpdate({
         student_id: studentId,
         test_id: testId,
@@ -31,9 +30,23 @@ const updatePointWithTestIdAndStudentId = async (testId, studentId, newGrade) =>
     return oldGrade;
 }
 
+const update = async (id, payload) => {
+    await Grade.findByIdAndUpdate(id, {
+        ...payload
+    })
+}
+
+const deleteGradeWithTestId = async (testId) => {
+    await Grade.find({
+        test_id: testId,
+    }).remove().exec()
+}
+
 module.exports = {
     create,
     findAllGradeWithTestId,
     getAllGradeWithStudentId,
     updatePointWithTestIdAndStudentId,
+    update,
+    deleteGradeWithTestId,
 }

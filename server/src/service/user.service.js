@@ -12,6 +12,25 @@ const create = async (payload) => {
     }
 }
 
+const update = async (id, payload) => {
+    try {
+        const newUser =  await User.findByIdAndUpdate(id, {
+            ...payload
+        })
+        return newUser
+    } catch (error) {   
+        console.log('err: ', error);
+    }
+}
+
+const remove = async (id) => {
+    try {
+        await User.findByIdAndDelete(id);
+    } catch (error) {
+        
+    }
+}
+
 const findAll = async () => {
     try {
         const teacher = await User.find({
@@ -34,4 +53,6 @@ module.exports = {
     create,
     findAll,
     getAllStudentInClass,
+    update,
+    remove,
 }
